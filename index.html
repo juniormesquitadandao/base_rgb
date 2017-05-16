@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>BaseRGB</title>
+  <meta charset="utf-8">
+</head>
+<body>
+
+  <script type="text/javascript">
+    var canvas = document.createElement('canvas');
+    canvas.width = 512;
+    canvas.height= 512;
+
+    var context = canvas.getContext('2d');
+
+    var imageData = context.createImageData(512, 512);
+    for(i = 0; i < imageData.data.length; i++){
+      imageData.data[i] = 1;
+    }
+    context.putImageData(imageData, 0, 0);
+
+    window.open(canvas.toDataURL('image/png'));
+  </script>
+
+</body>
+</html>
