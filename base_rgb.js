@@ -50,10 +50,14 @@ var BaseRGB = {
       imageData.data[image_index] = byte;
     }
 
-    imageData.data[imageData.data.length - 1] = image_index;
+    var last_byte_index = imageData.data.length - image_index + 1;
+    imageData.data[imageData.data.length - 4] = last_byte_index / 10 ** 4;
+    last_byte_index = last_byte_index % 10 ** 4;
+    imageData.data[imageData.data.length - 3] = last_byte_index / 10 ** 2;
+    imageData.data[imageData.data.length - 2] = last_byte_index % 10 ** 2;
+    imageData.data[imageData.data.length - 1] = 255;
 
     for(; (image_index + 1) % 4 != 0; image_index++){
-      imageData.data[image_index] = 0;
     }
     imageData.data[image_index] = 255;
 
@@ -82,10 +86,15 @@ var BaseRGB = {
     context.drawImage(img, 0, 0);
 
     var imageData = context.getImageData(0, 0, img.width, img.height);
-    console.log(imageData.data, canvas);
-    var max = imageData.data[imageData.data.length - 1];
+
+    var last_byte_index = parseInt(imageData.data[imageData.data.length - 4]) * 10 ** 2;
+    last_byte_index += parseInt(imageData.data[imageData.data.length - 3]);
+    last_byte_index *= 10 ** 2;
+    last_byte_index += parseInt(imageData.data[imageData.data.length - 2]);
+    last_byte_index = imageData.data.length - last_byte_index;
+
     var bytes = [];
-    for(i = 0; i < max; i++){
+    for(i = 0; i <= last_byte_index; i++){
       if ( (i + 1) % 4 != 0 ){
         bytes.push(imageData.data[i]);
       }
