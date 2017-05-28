@@ -27,7 +27,8 @@ var BaseRGB = {
     var x = Math.trunc(bytes.length / 4);
     var y = Math.sqrt(x);
     var z = Math.trunc(y);
-    var rgb_size = bytes.length + bytes.length / 4;
+    var w = Math.ceil(bytes.length / 3);
+    var rgb_size = w * 4;
     while(z ** 2 * 4 < rgb_size){
       z += 1;
     }
@@ -89,6 +90,7 @@ var BaseRGB = {
         bytes.push(imageData.data[i]);
       }
     }
+
     var uint8ClampedArray = new Uint8ClampedArray(bytes);
     var blob = new Blob([uint8ClampedArray], {type: "octet/stream"});
 
