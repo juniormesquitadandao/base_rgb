@@ -29,7 +29,7 @@ var BaseRGB = {
     var z = Math.trunc(y);
     var w = Math.ceil(bytes.length / 3);
     var rgb_size = w * 4;
-    while(z ** 2 * 4 < rgb_size){
+    while(z ** 2 * 4 <= rgb_size){
       z += 1;
     }
 
