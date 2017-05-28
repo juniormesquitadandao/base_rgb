@@ -89,7 +89,8 @@ var BaseRGB = {
         bytes.push(imageData.data[i]);
       }
     }
-    var blob = new Blob(bytes);
+    var uint8ClampedArray = new Uint8ClampedArray(bytes);
+    var blob = new Blob([uint8ClampedArray], {type: "octet/stream"});
 
     var url  = window.URL.createObjectURL(blob);
 
