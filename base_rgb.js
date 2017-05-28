@@ -38,13 +38,24 @@ var BaseRGB = {
     var context = canvas.getContext('2d');
 
     var imageData = context.createImageData(canvas.width, canvas.height);
-    var index = 0;
-    for(i = 0; index < bytes.length > 0; i+=4){
-      imageData.data[i+0] = bytes[index++];
-      imageData.data[i+1] = bytes[index++];
-      imageData.data[i+2] = bytes[index++];
-      imageData.data[i+3] = 255;
+
+    var byte_index = 0;
+    var image_index = 0;
+    for(;byte_index < bytes.length; image_index++){
+      var byte = 255;
+      if ( (image_index + 1) % 4 != 0 ){
+        byte = bytes[byte_index++];
+      }
+      imageData.data[image_index] = byte;
     }
+
+    imageData.data[imageData.data.length - 1] = image_index;
+
+    for(; (image_index + 1) % 4 != 0; image_index++){
+      imageData.data[image_index] = 0;
+    }
+    imageData.data[image_index] = 255;
+
     context.putImageData(imageData, 0, 0);
 
     canvas.toBlob(function(blob) {
@@ -70,7 +81,15 @@ var BaseRGB = {
     context.drawImage(img, 0, 0);
 
     var imageData = context.getImageData(0, 0, img.width, img.height);
-    var blob = new Blob(imageData.data);
+    console.log(imageData.data, canvas);
+    var max = imageData.data[imageData.data.length - 1];
+    var bytes = [];
+    for(i = 0; i < max; i++){
+      if ( (i + 1) % 4 != 0 ){
+        bytes.push(imageData.data[i]);
+      }
+    }
+    var blob = new Blob(bytes);
 
     var url  = window.URL.createObjectURL(blob);
 
