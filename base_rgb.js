@@ -68,14 +68,18 @@ var BaseRGB = {
 
       var a = document.createElement('a');
       a.href = url;
-      a.download = name + '.png';
+      a.download = name + '.rgb';
 
       var event = document.createEvent('MouseEvents');
       event.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
       a.dispatchEvent(event);
 
       window.URL.revokeObjectURL(url);
-      document.getElementsByTagName('span')[0].innerHTML = 'ok';
+
+      document.getElementsByTagName('span')[0].innerHTML = md5(bytes);
+      document.getElementsByTagName('span')[1].innerHTML = bytes.length + ' bytes';
+      document.getElementsByTagName('span')[2].innerHTML = md5(imageData.data);
+      document.getElementsByTagName('span')[3].innerHTML = imageData.data.length + ' bytes';
     });
   },
   decode: function(img, name){
@@ -108,13 +112,17 @@ var BaseRGB = {
 
     var a = document.createElement('a');
     a.href = url;
-    a.download = name.replace(/.png$/, '');
+    a.download = name.replace(/.rgb$/, '');
 
     var event = document.createEvent('MouseEvents');
     event.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
     a.dispatchEvent(event);
 
     window.URL.revokeObjectURL(url);
-    document.getElementsByTagName('span')[1].innerHTML = 'ok';
+
+    document.getElementsByTagName('span')[4].innerHTML = md5(uint8ClampedArray);
+    document.getElementsByTagName('span')[5].innerHTML = uint8ClampedArray.length + ' bytes';
+    document.getElementsByTagName('span')[6].innerHTML = md5(imageData.data);
+    document.getElementsByTagName('span')[7].innerHTML = imageData.data.length + ' bytes';
   }
 }

@@ -4,7 +4,8 @@
     <title>BaseRGB</title>
     <meta charset='utf-8'>
 
-    <script type='text/javascript' src='base_rgb.js'></script>
+    <script src='md5.min.js'></script>
+    <script src='base_rgb.js'></script>
   </head>
   <body>
     <section>
@@ -13,19 +14,55 @@
         <input type='file' onChange='encode(this)'>
       </div>
       <div>
-        <label>Original MD5:</label>
-        <span></span>
+        <label>Original</label>
+        <div>
+          <label>Checksum:</label>
+          <span></span>
+        </div>
+        <div>
+          <label>Size:</label>
+          <span></span>
+        </div>
+      </div>
+      <div>
+        <label>RGB</label>
+        <div>
+          <label>Checksum:</label>
+          <span></span>
+        </div>
+        <div>
+          <label>Size:</label>
+          <span></span>
+        </div>
       </div>
     </section>
 
     <section>
       <div>
         <label>Decode:</label>
-        <input type='file' onChange='decode(this)' accept='.png'>
+        <input type='file' onChange='decode(this)' accept='.rgb'>
       </div>
       <div>
-        <label>Original MD5:</label>
-        <span></span>
+        <label>Original</label>
+        <div>
+          <label>Checksum:</label>
+          <span></span>
+        </div>
+        <div>
+          <label>Size:</label>
+          <span></span>
+        </div>
+      </div>
+      <div>
+        <label>RGB</label>
+        <div>
+          <label>Checksum:</label>
+          <span></span>
+        </div>
+        <div>
+          <label>Size:</label>
+          <span></span>
+        </div>
       </div>
     </section>
   </body>
