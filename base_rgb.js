@@ -33,7 +33,7 @@ var BaseRGB = {
       z += 1;
     }
 
-    var canvas = document.getElementsByTagName('canvas')[0];
+    var canvas = document.createElement('canvas');
     canvas.width = z;
     canvas.height= z;
     var context = canvas.getContext('2d');
@@ -75,10 +75,11 @@ var BaseRGB = {
       a.dispatchEvent(event);
 
       window.URL.revokeObjectURL(url);
+      document.getElementsByTagName('span')[0].innerHTML = 'ok';
     });
   },
   decode: function(img, name){
-    var canvas = document.getElementsByTagName('canvas')[1];
+    var canvas = document.createElement('canvas');
     canvas.width = img.width;
     canvas.height= img.height;
 
@@ -114,5 +115,6 @@ var BaseRGB = {
     a.dispatchEvent(event);
 
     window.URL.revokeObjectURL(url);
+    document.getElementsByTagName('span')[1].innerHTML = 'ok';
   }
 }
